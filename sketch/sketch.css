@@ -1,0 +1,22 @@
+body {
+	font-family: Arial; 
+	font-size: 14px;
+	background-color: #c7c5d3;
+}
+
+.toprow {text-align:center;}
+    
+button {border-radius:3px; padding: 2px 8px; border:1px solid gray;}
+input {border-radius:3px; padding: 2px 8px; border:1px solid gray; margin:10px 20px 15px 0; }
+select {border-radius:3px; padding: 2px 8px; border:1px solid gray; margin-right:20px; }
+    
+.wrapper {
+        margin:auto;
+        max-width:560px; 
+        height:560px; 
+}
+
+.square {
+		float:left;        
+        background-color: black;
+}

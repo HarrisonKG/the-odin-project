@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>My Sketchpad</title>
+    <link rel="stylesheet" type="text/css" href="sketch.css"
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> 
+    <script src="jquery-v2.2.1.min.js"></script>
+    <script type="text/javascript" src="sketch.js"></script>
+</head>
+<body>
+    <div class="toprow">
+        <form>
+            Boxes per side:
+            <input id="numboxes" type="text" value="16" size="3">
+            Mode:
+            <select id="dropdown">
+                <option value="norm">Normal</option>
+                <option value="rainbow">Rainbow</option>
+                <option value="fade">Fade</option>
+                <option value="rainbowfade">Rainbow Fade</option>
+            </select>
+            <button>Update</button>
+        </form>
+    </div>
+    <div class="wrapper"></div>
+</body>
+</html>
