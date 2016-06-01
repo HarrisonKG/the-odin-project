@@ -130,3 +130,4 @@ describe "the greet function" do
     greet("Bob").should == "Hello, Bob!"
   end
 end
+
