@@ -1,5 +1,5 @@
 <p>
-  <strong>Commenter:</strong>
+  <strong>Name:</strong>
   <%= comment.commenter %>
 </p>
 
@@ -8,7 +8,10 @@
   <%= comment.body %>
 </p>
 
+<p>Posted <%= distance_of_time_in_words(comment.created_at, Time.now) %> ago
+</p>
+
 <p>
 	<%= link_to 'Destroy Comment', [comment.article, comment], 
-	method: :delete, data: { confirm: 'Are you sure?'} %>
+	method: :delete, data: {confirm: 'Are you sure?'} %>
 </p>

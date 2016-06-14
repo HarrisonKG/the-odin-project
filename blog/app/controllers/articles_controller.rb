@@ -25,6 +25,7 @@ class ArticlesController < ApplicationController
 		@article = Article.new(article_params)
 
 		if @article.save
+			flash.notice = "Article '#{@article.title}' created!"
 			redirect_to @article
 		else
 			render 'new'
@@ -35,6 +36,7 @@ class ArticlesController < ApplicationController
 		@article = Article.find(params[:id])
 
 		if @article.update(article_params)
+			flash.notice = "Article '#{@article.title}' updated!"
 			redirect_to @article
 		else
 			render 'edit'
@@ -44,9 +46,11 @@ class ArticlesController < ApplicationController
 	def destroy
 		@article = Article.find(params[:id])
 		@article.destroy
-
+		flash.notice = "Article '#{@article.title}' deleted!"
 		redirect_to articles_path
 	end
+
+	
 
 # other example has this saved into app/helpers
 # articles_helper.rb w/o private designation
@@ -54,7 +58,7 @@ class ArticlesController < ApplicationController
 
 	private
 	def article_params
-		params.require(:article).permit(:title, :text)
+		params.require(:article).permit(:title, :text, :tag_list)
 	end
 
 end
