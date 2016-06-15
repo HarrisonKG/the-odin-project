@@ -34,7 +34,14 @@ table{
 caption,th, td{
 	text-align:left; 
 	font-weight:normal; 
-	vertical-align:middle}
+	vertical-align:middle;
+	padding: 5px
+}
+
+tr:nth-child(even){
+	background-color: #f2f2f2
+}
+
 
 q, blockquote{quotes:"" ""}
 
