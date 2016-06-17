@@ -110,12 +110,6 @@ body{
 	-ms-border-radius:6px;
 	-khtml-border-radius:6px;
 	border-radius:6px;
-	-moz-background-clip:padding;
-	-webkit-background-clip:padding;
-	-o-background-clip:padding-box;
-	-ms-background-clip:padding-box;
-	-khtml-background-clip:padding-box;
-	background-clip:padding-box
 	}
 
 
@@ -170,11 +164,6 @@ p.flash{
 	background-image:-moz-linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6));
 	background-image:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6));
 	border:3px solid rgba(255, 255, 255, 0.5);
-	-moz-background-clip:padding;
-	-webkit-background-clip:padding-o-background-clip:padding-box;
-	-ms-background-clip:padding-box;
-	-khtml-background-clip:padding-box;
-	background-clip:padding-box;
 	text-shadow:rgba(0, 0, 0, 0.6) 0 -1px;
 	color:#fff;
 	margin:0 auto;
@@ -539,12 +528,6 @@ input[type=submit]{
 	-webkit-box-shadow:rgba(255, 255, 255, 0.306) 0 0 0.1em 1px inset;
 	-o-box-shadow:rgba(255, 255, 255, 0.306) 0 0 0.1em 1px inset;
 	box-shadow:rgba(255, 255, 255, 0.306) 0 0 0.1em 1px inset;
-	-moz-background-clip:padding;
-	-webkit-background-clip:padding;
-	-o-background-clip:padding-box;
-	-ms-background-clip:padding-box;
-	-khtml-background-clip:padding-box;
-	background-clip:padding-box;
 	font-size:1.2em
 }
 
