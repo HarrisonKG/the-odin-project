@@ -1,3 +1,3 @@
 # the_odin_project
 
-These are the projects I've put together while working through theodinproject.com site (full-stack web development with RoR)
+Projects built for The Odin Project curriculum (full stack web development using Ruby on Rails)
