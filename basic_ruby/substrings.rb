@@ -1,10 +1,10 @@
 def substrings(string, dictionary)
 	freq = Hash.new(0)
-	dictionary.each{ |word| 
+	dictionary.each do |word| 
 		if string.downcase.include? word
 			freq[word] = string.downcase.scan(/#{word}/).length 
 		end
-	}
+	end
 	puts freq
 end
 

@@ -1,7 +1,7 @@
 #cipher method preserves case by looping
 #back to beginning of alphabet after z
 def caesar_cipher(text, cipher)
-  text.scan(/./) { |symbol|
+  text.scan(/./) do |symbol|
   	if symbol.between?("a", "z")
 	  	ascii = symbol.ord + cipher%26
 	  	ascii-=26 if ascii > 122 
@@ -13,7 +13,7 @@ def caesar_cipher(text, cipher)
 	 else 
 	 	print symbol
 	 end
-  }
+  end
   print "\n"
 end
 

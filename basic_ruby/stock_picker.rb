@@ -7,13 +7,13 @@ def stock_picker(prices)
 
 	#iterate through array modifying min and max_diff
 	# to find maximum profit
-	prices.each{|price| 
+	prices.each do |price| 
 		min = price if price < min
 		if price - min > max_diff
 			max_diff = price - min
 			profit = [min, price]
 		end
-	}
+	end
 
 	puts profit
 
