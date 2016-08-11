@@ -82,16 +82,24 @@ module Enumerable
 	end
 
 	def my_inject(init = nil)
-		#initializes accumulator to parameter if given
-		#and adds value at index 0 to total
-		if init
-			accumulator = yield(init, self[0])
+		if block_given?
+			#initializes accumulator to parameter if given
+			#and adds value at index 0 to total
+			if init
+				accumulator = yield(init, self[0])
+			else
+				accumulator = self[0]
+			end
+			#counts from index 1 to end, yields each to block
+			for i in 1..self.length-1  
+				accumulator = yield(accumulator, self[i])
+			end
 		else
 			accumulator = self[0]
-		end
-		#counts from index 1 to end, yields each to block
-		for i in 1..self.length-1  
-			accumulator = yield(accumulator, self[i])
+			for i in 1..self.length-1 
+				m = accumulator.method(init)
+				accumulator = m.call(self[i])
+			end
 		end
 		accumulator
 	end		
@@ -102,6 +110,5 @@ module Enumerable
 
 end
 
-#puts [1, 2, 3, 4, 5, 6].my_inject {|sum, n| sum * n}
-puts [2,4,5].multiply_els
+puts [1, 2, 3, 4].my_inject(:*) #{|i| i*2 }
 
