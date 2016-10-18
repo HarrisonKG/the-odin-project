@@ -6,15 +6,9 @@ class Game
 
 
 	def initialize
-		# gets player names
-		puts "Enter player 1 (X) name:"
-		player1 = gets.chomp
-		puts "Enter player 2 (O) name:"
-		player2 = gets.chomp
-
 		# creates player instances
-		@player1 = Player.new(player1, :X)
-		@player2 = Player.new(player2, :O)
+		@player_X = Player.new("Player X", :X)
+		@player_O = Player.new("Player O", :O)
 
 		# initializes grid array
 		@grid = [0,1,2,3,4,5,6,7,8]
@@ -28,10 +22,20 @@ class Game
 		puts @grid.each_slice(3) { |row| puts row.join(" . ")}
 	end
 
+	# identifies which player's turn it is to play
+	def current_player
+		@current_turn.even? ? @player_O : @player_X
+	end
+
+	# identifies which player just played, to check if won
+	def played_last
+		@current_turn.even? ? @player_X : @player_O
+	end
+
 	# handles the input for each turn
 	def turn
 		# Queries current player for move and displays grid
-		puts "\n#{current_player.name} (#{current_player.symbol}), it's your turn. Where would you like to go?\n"
+		puts "\n#{current_player.name}, it's your turn. Where would you like to go?\n"
 		show_grid
 
 		# checks if move is valid and updates grid array
@@ -44,24 +48,14 @@ class Game
 		end
 	end
 
-	# identifies which player's turn it is to play
-	def current_player
-		@current_turn.even? ? @player2 : @player1
-	end
-
-	# identifies which player just played, to check if won
-	def played_last
-		@current_turn.even? ? @player1 : @player2
-	end
-
 	# evaluates true if any winning combos were played by the last player
-	def winner
+	def win
 		WIN.any? {|combo| combo.all? { |i| @grid[i] == played_last.symbol} }
 	end
 
-	# plays until a winner or the board is full
+	# plays until a win or the board is full
 	def play
-		while !winner && @current_turn < 10
+		while !win && @current_turn < 10
 			turn
 		end
 		result
@@ -71,7 +65,7 @@ class Game
 	def result
 		puts "\n\n"
 		show_grid
-		if winner
+		if win
 			puts "#{played_last.name} won!"
 		else
 			puts "You tied!"
@@ -80,7 +74,7 @@ class Game
 	end
 
 	def play_again
-		puts "Would you like to play again? y/n"
+		puts "\nWould you like to play again? y/n"
 		answer = gets.chomp.downcase
 
 		if answer == "y"
@@ -88,7 +82,7 @@ class Game
 			@current_turn = 1
 			play
 		else
-			"Thanks for playing!"
+			puts "\nThanks for playing!\n"
 		end
 	end
 end
@@ -96,4 +90,3 @@ end
 
 Game.new.play
 
-#		WIN.any? {|combo| combo.all? { |i| @grid[i] == @grid[combo[0]]} }
