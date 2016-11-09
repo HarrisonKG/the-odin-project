@@ -43,7 +43,7 @@ Please begin.\n\n}
 			# error checking
 			if guess.all? {|i| i.between?(0, 5)}
 				# checks accuracy and counts turn
-				check_code(guess)
+				update_clue(guess)
 				@turns += 1
 			else
 				puts "Invalid submission. Please enter 4 numbers between 0 and 5, such as 1442 or 0530"
@@ -51,18 +51,26 @@ Please begin.\n\n}
 		end
 
 
-		def check_code(guess)
+		def update_clue(guess)
 			#initializes array to build clue
 			clue = []
 
+			# checks for number of exact matches
 			exact_matches = exact_match(guess)
 			# adds a 2 for each exact match
 			exact_matches.times { clue << 2 } 
 
+			# checks for number of correct numbers in the wrong place
 			semi_matches = semi_match(guess)
 			# adds a 1 for each "semi-match"
 			semi_matches.times { clue << 1 }
 
+			# check if won
+			check_win(clue)
+		end
+
+
+		def check_win(clue)
 			# redirect to won if all values are correct
 			if clue == [2,2,2,2]
 				@game_over = true	
@@ -84,6 +92,7 @@ Please begin.\n\n}
 			4 - @indices.length
 		end
 
+
 		# finds total number of "semi-matches" (correct number, incorrect index)
 		def semi_match(guess)
 			# removes exact matches from guess 
@@ -97,21 +106,20 @@ Please begin.\n\n}
 			@indices.length - unmatched.length
 		end
 
+
 		def won
 			puts "\nYou won!!!\n\n"
 			play_again
 		end
 
+
 		def play_again
 			puts "Would you like to play again? y/n"
 			answer = gets.chomp.downcase
 			if answer == "y"
-				@turns = 1
-				@game_over = false
-				create_code
-				play
+				Game.new.play
 			else
-				puts "Thank you for playing!\n"
+				puts "Thank you for playing!\n\n"
 			end
 		end
 	end
