@@ -37,20 +37,20 @@ module Hangman
 			while !win && @turns < TURNS
 				turn
 			end
-			result
+			# counter increments at start of turn, so must be less than max turns
+			if @turns >= TURNS
+				puts "\n Sorry, you ran out of turns. The word was #{@secret_word}"
+				play_again
+			end
 		end
 
 
+		# accepts one character from user and checks for matches and win
 		def turn
+			@turns += 1
 			@guess_letter = gets[0]
 			show_matches
-
-			# checks for win and increments turn
-			result if win
-			@turns += 1
-
-			# shows how many turns remain
-			puts "\n You have #{TURNS - @turns} turns left"
+			check_win
 		end
 
 
@@ -59,8 +59,7 @@ module Hangman
 			@secret_word.each_char.with_index do |char, index|
 				@guess_word[index] = char if char == @guess_letter 
 			end
-
-			# prints the word with matched letters
+			# prints updated guess with matched letters
 			@guess_word.each_char { |char| print " #{char}" }
 		end
 
@@ -71,14 +70,15 @@ module Hangman
 		end
 
 
-		# shows win or loss
-		def result
-			if win 
+		# shows win or remaining turns
+		def check_win
+			if win
 				puts "\n You win!" 
+				play_again
 			else
-				puts "\n Sorry, you ran out of turns. The word was #{@secret_word}"
+				# shows how many turns remain
+				puts "\n You have #{TURNS - @turns} turns left"
 			end
-			play_again
 		end
 
 
