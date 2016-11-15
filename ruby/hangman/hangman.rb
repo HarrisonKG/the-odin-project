@@ -38,7 +38,9 @@ module Hangman
 				turn
 			end
 			# counter increments at start of turn, so must be less than max turns
-			if @turns >= TURNS
+			if win
+				play_again
+			else
 				puts "\n Sorry, you ran out of turns. The word was #{@secret_word}"
 				play_again
 			end
@@ -48,7 +50,7 @@ module Hangman
 		# accepts one character from user and checks for matches and win
 		def turn
 			@turns += 1
-			@guess_letter = gets[0]
+			@guess_letter = gets[0].downcase
 			show_matches
 			check_win
 		end
@@ -74,7 +76,6 @@ module Hangman
 		def check_win
 			if win
 				puts "\n You win!" 
-				play_again
 			else
 				# shows how many turns remain
 				puts "\n You have #{TURNS - @turns} turns left"
