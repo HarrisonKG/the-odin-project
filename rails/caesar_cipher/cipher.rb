@@ -1,18 +1,11 @@
 require 'sinatra'
 require 'sinatra/reloader'
 
-# determines alphabetic case, prints if non-letter
+# determines alphabetic case, skips if non-letter
 def caesar_cipher(text, cipher)
-  encrypted = text.split('').map do |char|
-  	if char.between?("a", "z")
-	  	char = letter_shift(char, cipher, 122)
-	elsif char.between?("A", "Z")
-	  	char = letter_shift(char, cipher, 90)
-	else 
-	 	char
-	end
-  end
-  return encrypted.join
+  text.gsub!(/[a-z]/) {|char| letter_shift(char, cipher, 122) }
+  text.gsub!(/[A-Z]/) {|char| letter_shift(char, cipher, 90) }
+  return text
 end
 
 
@@ -29,7 +22,5 @@ get '/' do
 	cipher = params['cipher'].to_i
 	
 	ciphertext = caesar_cipher(plaintext, cipher)
-
 	erb :index, :locals => {:ciphertext => ciphertext}
-
 end
