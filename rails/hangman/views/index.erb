@@ -1,0 +1,19 @@
+<html>
+  <head></head>
+  <body>
+    <p>
+      <%= "Welcome to Hangman! You have #{turns} turns to guess a secret word. Please enter the first letter you want to guess." %>
+    </p>
+    <p> 
+      <%= "Turns left: #{turns}" %>
+   </p>
+   <br>
+    <form>
+      <input type='text' name='guess' style='width:80px' />
+      <input type='submit' value='Guess' />
+    </form>
+    <p>
+      <%= guesstext %>
+    </p>
+  </body>
+</html>
