@@ -1,5 +1,5 @@
 require 'sinatra'
-require 'sinatra/reloader'
+require 'sinatra/reloader' if development?
 
 # determines alphabetic case, skips if non-letter
 def caesar_cipher(text, cipher)
