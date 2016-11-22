@@ -5,7 +5,7 @@
       <%= "Welcome to Hangman! You have #{turns} turns to guess a secret word. Please enter the first letter you want to guess." %>
     </p>
     <p> 
-      <%= "Turns left: #{turns}" %>
+      <%= "Turns left: #{@turns_left}" %>
    </p>
    <br>
     <form>
@@ -13,7 +13,9 @@
       <input type='submit' value='Guess' />
     </form>
     <p>
-      <%= guesstext %>
+      <%= @guess_word %>
     </p>
+    <p>
+      <%= @secret_word %>
   </body>
 </html>
