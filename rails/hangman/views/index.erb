@@ -13,9 +13,15 @@
       <input type='submit' value='Guess' />
     </form>
     <p>
-      <%= @guess_word %>
+      <%= @guess_word.split("").join(" ") %>
     </p>
     <p>
       <%= @secret_word %>
-  </body>
+    </p>
+    <p>
+      <%= @guesses %>
+    </p>  
+    <p>
+      <%= @result %>
+    </body>
 </html>
