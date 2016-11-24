@@ -1,23 +1,22 @@
-# still has issues with updating session variables (turns lagging)
-#legs turns deduction by 1 if new update to array. Doesn't lag or change if already guessed
-
 require 'sinatra'
 require 'sinatra/reloader' if development?
 
 TURNS = 15
 enable :sessions
 
+
 	get '/' do 
 		if session[:secret_word] == nil
 			redirect to('/new_game')
 		end
 		# guess set to "" if params are empty to avoid nil exception
-		session[:guess_letter] = params['guess'] ||= ""
 		variables
 		turn
-		erb :index, :locals => { :guess => @guess, :turns => TURNS }
+		erb :index, :locals => { :turns => TURNS, :game_over => session[:game_over], 
+			:turns_left => session[:turns_left]}
 		# :secret_word => secret_word, :turns_left => @turns_left, :guess_word => guess_word
 	end
+
 
 	get '/new_game' do 
 		session[:secret_word] = pick_word
@@ -28,22 +27,16 @@ enable :sessions
 		redirect to('/')
 	end
 
-	put '/' do 
-		variables
-	 	turn
-	 	redirect to('/')
-	end
-
-
 	
 helpers do
 
 	def variables
-		@turns_left = session[:turns_left]
+		session[:guess_letter] = params['guess'] ||= ""
 		@secret_word = session[:secret_word]
 		@guesses = session[:guesses]
 		@guess_word = session[:guess_word]
 		@guess_letter = session[:guess_letter]
+		session[:game_over] = false
 	end
 
 	
@@ -59,9 +52,9 @@ helpers do
 
 	def build_outline
 		# builds string of underscores to store progression of guesses
-		@guess_word = ""
-		@secret_word.length.times { @guess_word << "_" }
-		@guess_word
+		guess_word = ""
+		@secret_word.length.times { guess_word << "_" }
+		guess_word
 	end
 
 
@@ -73,10 +66,9 @@ helpers do
 			build_guess_array
 			check_letter
 		end
-		# counter increments at start of turn, so must be less than max turns
-			@result = "You won!" if win
-			@result = "Sorry, you ran out of turns. The word was #{@secret_word}." if session[:turns_left] < 1
+		check_win
 	end
+
 
 	def build_guess_array
 		# subtract turn and add to array if hasn't been guessed; add to guessed array if isn't in word
@@ -88,16 +80,24 @@ helpers do
 		end
 	end
 
+
 	def check_letter
 		# iterate through secret word and sub in accurate guesses
 			@secret_word.each_char.with_index do |char, index|
 			@guess_word[index] = char if char == @guess_letter 
 			end
-		@guess_word
 	end
 
 
-	# win when cumulative guesses equal the secret word
+	def check_win
+		if win || session[:turns_left] < 1
+			session[:game_over] = true
+			@result = "You won!" if win
+			@result = "Sorry, you ran out of turns. The word was #{@secret_word}." if session[:turns_left] < 1
+		end
+	end
+
+
 	def win
 		@guess_word.split.join == @secret_word
 	end

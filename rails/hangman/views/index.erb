@@ -5,23 +5,25 @@
       <%= "Welcome to Hangman! You have #{turns} turns to guess a secret word. Please enter the first letter you want to guess." %>
     </p>
     <p> 
-      <%= "Turns left: #{@turns_left}" %>
-   </p>
-   <br>
+      <%= "Turns left: #{turns_left}" %>
+   </p><br>
     <form>
-      <input type='text' name='guess' style='width:80px' />
+      <input type='text' name='guess' style='width:80px' autofocus />
       <input type='submit' value='Guess' />
     </form>
     <p>
       <%= @guess_word.split("").join(" ") %>
-    </p>
-    <p>
-      <%= @secret_word %>
-    </p>
+    </p><br>
     <p>
       <%= @guesses %>
-    </p>  
+    </p><br>
     <p>
       <%= @result %>
+    </p><br>
+    <% if game_over %>
+      <form action='/new_game'>
+        <input type='submit' name='play_again_button' value='Play again?' />
+      </form>
+    <% end %>
     </body>
 </html>
