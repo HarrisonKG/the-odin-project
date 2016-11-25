@@ -1,5 +1,5 @@
 require 'sinatra'
-require 'sinatra-reloader' if development?
+require 'sinatra/reloader' if development?
 
 TURNS = 15
 enable :sessions
@@ -90,9 +90,12 @@ helpers do
 
 
 	def check_win
-		if win || session[:turns_left] < 1
+		if win 
 			session[:game_over] = true
-			@result = "You won!" if win
+			@result = "You won!"
+		end
+		if !win && session[:turns_left] < 1
+			session[:game_over] = true
 			@result = "Sorry, you ran out of turns. The word was #{@secret_word}." if session[:turns_left] < 1
 		end
 	end
