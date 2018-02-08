@@ -1,4 +1,3 @@
-# the_odin_project
 
 These are projects I built when I was teaching myself web development through The Odin Project curriculum (full stack web development using Ruby on Rails).  
 
